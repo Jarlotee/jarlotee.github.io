@@ -1,5 +1,5 @@
 ---
-title:  "The journey to Build Once"
+title:  "The Journey to Build Once"
 date:   2016-01-09 18:23:00
 categories:
 - Continuous Integration
@@ -13,7 +13,7 @@ Not too long ago my coworker [David] mentioned how we could drive improvement an
 
 Let me unpack that a little...
 
-In the .NET world it is common to see our solutions with multiple configurations for our various environments. (dev, qa, prod etc.)
+In the .NET world it is common to see solutions with multiple configurations for various environments. (e.g. dev, qa, prod etc.)
 
 So when we moved to the world of continuous integrations it was logical to set up our build process like this:
 
@@ -58,10 +58,10 @@ I tend to agree but a fileshare, build artifacts, etc. would work just as well.
 
 No matter where you are on the spectrum of continuous delivery building once and deploying faster helps!
 
-Here are a few on my musings on why this is worth the time investment:
+Here are a few of my musings on why this is worth the investment:
 
-1. But packaging your code and config in an environment agnostic way provides you with a great deal more flexibility in how and when you deploy.
-2. If you are deploying from trunk/master a la [Github flow] then this flexibility is crucial as it allows you *prove* a package in your deployment pipeline while still merging new features.
+1. Packaging your code and config in an environment agnostic way provides you with more flexibility in *how* and *when* you deploy.
+2. When deploying from trunk/master a la [Github flow] this flexibility is crucial as it allows you *prove* a package in your deployment pipeline while still merging new features.
 3. You can roll-back your environments to a specific version much quicker and easier. 
 4. You can pull down the any version (with the same bits!) locally to test and debug without having to rebuild or do source code time traveling (*which sounds like more fun than it is*).
 
