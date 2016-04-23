@@ -9,7 +9,7 @@ tags:
 - SemVer
 ---
 
-Not too long ago my coworker [David] mentioned how we could drive improvement and flexibility in our build pipeline by decoupling our build process from our target environments.
+Not too long ago my coworker [David Diehl] mentioned how we could drive improvement and flexibility in our build pipeline by decoupling our build process from our target environments.
 
 Let me unpack that a little...
 
@@ -73,4 +73,4 @@ Are you already *Build Once*-ing?
  
 [Github flow]:  https://guides.github.com/introduction/flow/
 [envify]:       https://github.com/hughsk/envify
-[David]:        http://daveondevops.com/
+[David Diehl]:  http://daveondevops.com/
