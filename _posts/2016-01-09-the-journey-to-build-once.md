@@ -4,9 +4,7 @@ date:   2016-01-09 18:23:00
 categories:
 - Continuous Integration
 tags:
-- Teamcity
-- GitFlow
-- SemVer
+- DevOps
 ---
 
 Not too long ago my coworker [David Diehl] mentioned how we could drive improvement and flexibility in our build pipeline by decoupling our build process from our target environments.
