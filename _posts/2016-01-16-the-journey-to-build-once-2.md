@@ -13,32 +13,32 @@ tags:
 
 #### (Preamble) Moving from SVN to Github
 
-Not too long ago we switched from developing new projects out of our local SVN server to private Github repo. 
-One of the primary reasons for the switch is that we needed to collaborate better with contractors that did not always have easy access to our network.
+Not too long ago we switched from developing new projects out of our local SVN server to a private Github repo. 
+One of the primary reasons for the switch is that we needed to collaborate better with contractors who did not always have easy access to our network.
 
-But the power of Github and similar hosted solutions is not just in a having a secure, generally available repository, but the extra tooling built on top.
+The task of replatforming our content management system and rewriting our .COM from scratch involved multiple teams of contractors. Each developer came with a different level of maturity and there was a lot of difficulty in creating a shared understanding of the work that needed to be done, how it should be architected, and its implementation details.
 
-The task of replatforming our content management system and rewriting our .com from scratch involved multiple teams of contractors. Each developer came with a different level of maturity and there was a lot of difficulty in creating a shared understanding of the work that needed to be completed, much less how it was to be architected or its implementation details.
+When we decided to take the plunge to Github we opted into a variation of the [Github flow] model. Using feature branches and pull requests we were able to reach our goals on code quality while also engaging our contractors. Politically it also helped to have an honest, open dialog about what was being delivered in the pull requests. 
 
-When we decided to take the plunge to Github we opted into a variation of the [Github flow] model. Using feature branches and pull requests we were able to reach our goals on code quality while also engaging our contractors. Politically it also helped to have an honest, open dialog about what was being delivered in pull requests. 
+At the risk of sounding like a spokesman or evangelist of Github I just cannot quantify how much of an impact it has had on making the project a success. The Architects, Analysts, and Leads could never have accomplished so much or so quickly without great collaboration tools like this.
 
-At the risk of sounds like a spokesman or evangelist of Github I just cannot quantify how much of an impact it has had on making the project a success. The Architects, Analysts and Leads could never have accomplished so much or so quickly without great collaboration tools like this.
-
-As the project matured we implemented feature branch builds on our CI server that allowes us greater visiblity by ensure each branch compiled and was passing unit tests.
+As the project matured we implemented feature branch builds on our CI server that allowed us greater visibility by ensuring each branch compiled and was passing unit tests.
 
 #### Semantic Versioning using Github Pull Request Tags
 
-As I was beggining to plan out this new build once journey I realized our typical way of managing versioning *cough* manually *cough* was far from ideal. 
+As I was beginning to plan out this new [Build Once] journey I realized our typical way of managing versioning (manually) was far from ideal. 
 
 Under SVN we created release branches which helped provide semantic meaning, but everyone at some point forgot to update the Dev builds with the new version once the branch was cut. It was also a chore to generate release info without manually dredging the commit logs between release branches or remembering to keep a running list.
 
-So when we started our new project we opted into the same manual model 0.1.0.{build counter}. By deploying from master we lost the habit of cutting a branch and so went away our prompt for updating the build version, it wasn't long before we saw `0.1.0.3225`
+So when we started our new project we opted into the same manual model `0.1.0.{build counter}`. By deploying directly from master we lost the habit of cutting a branch and lost our prompt for updating the build version. It wasn't long before we saw `0.1.0.3225`
 
-It took me longer than I would like to admit to realize that we had moved all of our rigor to the our pull requests and mentioned in passing to our Architect that it would be sweet to be able to automatically generate our [SemVer] based on pull request and their tags.
+It took me longer than I would like to admit to realize that we had moved all of our rigor to the pull requests. Later I mentioned to our Architect that it would be sweet to be able to automatically generate our [SemVer] based on pull requests and their tags.
 
-So for my first task in creating our Build Once pipeline was to use git history, pull request tags and the Github api to generate a semantic version to slap onto our release packages. 
+I decided that this should be my first task in creating our [Build Once] pipeline. 
 
-These code snippets are in powershell, but it shouldn't be hard to translate them into the scripting langugage of your choice.
+Now on to the codes!
+
+These code snippets are in powershell, but it shouldn't be hard to translate them into the scripting language of your choice.
 
 ```powershell
 [CmdletBinding()]
@@ -64,7 +64,7 @@ function GetPullRequest($PullRequestNumber)
 }
 
 ```
-We start off with by passing in the current commit hash and a Github token, then define a function to aquire pull request data through the Github API.
+We start off with passing in the current commit hash and a Github token, then define a function to procure pull request data through the [Github API].
 
 ```powershell
 
@@ -76,7 +76,7 @@ $PullRequests = New-Object System.Collections.Stack
 
 ```
 
-Here we set up our patch variables and decalare our stack which we will use to unwind our commit history.
+Here we set up our patch variables and declare our stack which we will use to unwind the commit history.
 
 ```powershell
 
@@ -105,7 +105,7 @@ if($LastTag)
 
 By using git tags to signify our releases we have a starting point with our last version and can circumvent walking the entire tree to create the next SemVer.
 
-Using `match` with `git decribe` allows us to still utilize custom tags without interfearing with the build process.
+Using `match` with `git describe` allows us to utilize custom tags without interfering with the build process.
 
 ```powershell
 $CommitMessages = & git log --pretty=%s $RevisionRange 
@@ -121,7 +121,7 @@ foreach($message in $CommitMessages)
 
 ```
 
-Here we walk the commit history since the last tag and use regular expressions to pull out the PR numbers
+Here we walk the commit history since the last tag and use regular expressions to pull out the pull request numbers.
 
 ```powershell
 
@@ -157,13 +157,15 @@ Write-Host "##teamcity[buildNumber '$major.$minor.$patch']"
 
 ```
 
-Lastly we work through the stack calling the github api and looking for tags that indicate a major or minor release change.
+Lastly we work through the stack calling the Github API and looking for tags that indicate a major or minor release change.
 
-Based on the tags present we incriment the right numbers and in this case call back to Teamcity to let it know we have calculated the new version for the build.
+Based on the tags present we increment the appropriate numbers and call back to the CI server (Teamcity) with the new version.
 
-So there you have it dynamically created semantic versions for your builds, a key to Build Once, but also beneficial for anyone using feature branches. 
+In only a few lines of code we can automatically generate a semantically meaningful version number to be used in our builds!
 
-> Please be aware of the query limits available to you using your Github API token. In my case we already had hundreds of pull requests before we made our first git tag. Depending on how long your repository has been live it may be beneficial to start with a manually generated tag close to your current head. This will ensure you do not exahust your token request limit on your first build.
+> Please be aware of the query limits available to you using your Github API token. In my case we already had hundreds of pull requests before we made our first git tag. Depending on how long your repository has been live it may be beneficial to start with a manually generated tag close to your current head. This will ensure you do not exhaust your token request limit on your first build.
 
-[SemVer]:  http://semver.org/
-[Github flow]:          https://guides.github.com/introduction/flow/
+[Build Once]:   /2016/the-journey-to-build-once/
+[SemVer]:       http://semver.org/
+[Github flow]:  https://guides.github.com/introduction/flow/
+[Github API]:   https://developer.github.com/v3/issues/#get-a-single-issue
