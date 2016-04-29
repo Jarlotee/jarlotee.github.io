@@ -30,9 +30,9 @@ As I was beginning to plan out this new [Build Once] journey I realized our typi
 
 Under SVN we created release branches which helped provide semantic meaning, but everyone at some point forgot to update the Dev builds with the new version once the branch was cut. It was also a chore to generate release info without manually dredging the commit logs between release branches or remembering to keep a running list.
 
-So when we started our new project we opted into the same manual model `0.1.0.{build counter}`. By deploying directly from master we lost the habit of cutting a branch and lost our prompt for updating the build version. It wasn't long before we saw `0.1.0.3225`
+So when we started our new project we opted into the same manual model `0.1.0.{build counter}`. By deploying directly from master we lost the habit of cutting a branch and lost our prompt for updating the build version. It wasn't long before we saw `0.1.0.3225` :disappointed:
 
-It took me longer than I would like to admit to realize that we had moved all of our rigor to the pull requests. Later I mentioned to our Architect that it would be sweet to be able to automatically generate our [SemVer] based on pull requests and their tags.
+I realized that we had moved all of our rigor to the pull requests. Later I mentioned to our Architect that it would be sweet to be able to automatically generate our [SemVer] based on pull requests and their tags.
 
 I decided that this should be my first task in creating our [Build Once] pipeline. 
 
