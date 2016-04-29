@@ -63,7 +63,7 @@ Here are a few of my musings on why this is worth the investment:
 3. You can roll-back your environments to a specific version much quicker and easier. 
 4. You can pull down the any version (with the same bits!) locally to test and debug without having to rebuild or do source code time traveling (*which sounds like more fun than it is*).
 
-**Next up** we will tackle building meaningful and semantically *correct* package versions.
+**[Next up]** we will tackle building meaningful and semantically *correct* package versions.
 
 Where are you on the continuous deployment journey? 
 
@@ -72,3 +72,4 @@ Are you already *Build Once*-ing?
 [Github flow]:  https://guides.github.com/introduction/flow/
 [envify]:       https://github.com/hughsk/envify
 [David Diehl]:  http://daveondevops.com/
+[Next up]:      /2016/the-journey-to-build-once-2/
