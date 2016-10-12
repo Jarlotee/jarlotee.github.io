@@ -165,7 +165,10 @@ In only a few lines of code we can automatically generate a semantically meaning
 
 > Please be aware of the query limits available to you using your Github API token. In my case we already had hundreds of pull requests before we made our first git tag. Depending on how long your repository has been live it may be beneficial to start with a manually generated tag close to your current head. This will ensure you do not exhaust your token request limit on your first build.
 
+[Next] we will prepare our js builds for Build Once.
+
 [Build Once]:   /2016/the-journey-to-build-once/
 [SemVer]:       http://semver.org/
 [Github flow]:  https://guides.github.com/introduction/flow/
 [Github API]:   https://developer.github.com/v3/issues/#get-a-single-issue
+[Next]:      /2016/the-journey-to-build-once-3/
