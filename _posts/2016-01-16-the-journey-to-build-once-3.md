@@ -17,9 +17,9 @@ In a [previous post] I mentioned how we were using [envify] combined with [brows
 
 There are a few problems with this setup.
 
-**It bakes in config to the js bundle** Making life harder when you try to debug a prod js bundle in a non-prod environment.
+**It bakes in config to the js bundle.** Making life harder when you try to debug a prod js bundle in a non-prod environment.
 
-**It causes each environment to have its own unique hash** Building an environment agnostic deployment package would take longer as you have to build a seperate js bundles for each environment
+**It causes each environment to have its own unique hash.** Building an environment agnostic deployment package would take longer as you have to build a seperate js bundles for each environment
 
 One approach to solving this problem is to render the config from the server and inject it into the page with each request.
 
