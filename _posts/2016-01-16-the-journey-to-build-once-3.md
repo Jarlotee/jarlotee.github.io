@@ -11,7 +11,7 @@ tags:
 - .Net
 ---
 
-### Injecting javascript configuration from web.config
+#### Injecting javascript configuration from web.config
 
 In a [previous post] I mentioned how we were using [envify] combined with [browserify] to set up our front end configuration values.
 
