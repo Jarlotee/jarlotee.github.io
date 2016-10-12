@@ -140,7 +140,7 @@ namespace Application.Configuration
 
 Lastly we inject the configuration into the browser:
 
-```cshtml
+```html
 <script type="text/javascript">
     window.config = @Html.Raw(FrontEndConfiguration.Get());
 </script>
