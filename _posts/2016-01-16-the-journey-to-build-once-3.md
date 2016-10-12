@@ -66,6 +66,7 @@ namespace Application.Configuration
 ```
 
 Which allows us to change something like this:
+
 ```xml
 <configSections>
   <section name="jsSettings" type="System.Configuration.IgnoreSectionHandler, System.Configuration" />
