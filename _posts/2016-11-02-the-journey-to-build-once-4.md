@@ -31,6 +31,7 @@ App_{Version #}\
 -- metadata.xml
 ```
 
+
 #### Transforming configuration for all environments
 
 Visual Studio will automatically transform your `[web|app].config` file based on your current build profile (if the names match).
