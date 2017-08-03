@@ -1,7 +1,7 @@
 # Site settings
 title: 'Jared Lotti'
 description: '.Net developer, tinkerer, father'
-url: 'https://www.jaredlotti.com'
+url: 'http://www.jaredlotti.com'
 baseurl: '/'
 google_analytics: 'UA-76797595-1'
 disqus_shortname: 'jaredlotti'
